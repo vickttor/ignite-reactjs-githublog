@@ -4,9 +4,9 @@ import { InputColor, InputColorContainer, PopoverArrow, PopoverClose, PopoverCon
 import { SwitchTheme } from "./components/SwitchTheme";
 import { useAtom } from "jotai";
 import { primaryColorAtom } from "@/App";
+import { ChangeEvent } from "react";
 
 import * as Popover from '@radix-ui/react-popover';
-import { ChangeEvent } from "react";
 
 export function PalettePopover() {
 
@@ -30,12 +30,15 @@ export function PalettePopover() {
           
           <h3>Tema</h3>
 
-
           <InputColorContainer tabIndex={0}>
-            <label>Cor Principal: </label>
-            <InputColor type="color" key={primaryColorOfChoice} defaultValue={primaryColorOfChoice} onBlur={handleColorOfChoiceChange}/>
+            <label>Cor: </label>
+            <InputColor 
+              type="color" 
+              key={primaryColorOfChoice} 
+              defaultValue={primaryColorOfChoice} 
+              onBlur={handleColorOfChoiceChange}
+            />
           </InputColorContainer>
-
 
           <SwitchTheme />
           

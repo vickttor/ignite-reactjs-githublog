@@ -84,10 +84,11 @@ export const UserProfileInformation = styled.div`
         right: 0;
         text-transform: uppercase;
         display: flex;
+        flex-direction: row;
         align-items: center;
         justify-content: center;
         gap: 0.5rem;
-
+ 
         & > * {
           line-height: 0;
         } 
@@ -129,5 +130,13 @@ export const SearchBarContainer = styled.div`
   }
 `;
 
+// Cards Grid Container
+export const CardGridContainer = styled.div`
+  width: 100%;
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+`
 
 

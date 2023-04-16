@@ -6,7 +6,7 @@ export default {
   span: '#112131',
   label: '#1C2F41',
   border: '#3A536B',
-  post: '#7B96B2',
+  post: '#E7EDF4',
   profile: '#AFC2D4',
   bgcolor: '#E7EDF4',
   input: '#C4D4E3',
