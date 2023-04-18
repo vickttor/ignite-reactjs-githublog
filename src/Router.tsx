@@ -10,7 +10,7 @@ export function Router () {
       <Routes>
         <Route path="/" element={<DefaultLayout/>}>
           <Route path="/" element={<HomePage/>} />
-          <Route path="/post/:id" element={<PostPage/>} />
+          <Route path="/posts/:id" element={<PostPage/>} />
         </Route>
       </Routes>
     </BrowserRouter>

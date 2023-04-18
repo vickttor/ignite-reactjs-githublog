@@ -74,6 +74,13 @@ export const UserProfileInformation = styled.div`
       justify-content: center;
       gap: 0.5rem;
 
+      svg {
+        transition: all 0.1s ease-in;
+        &:hover{
+          transform: translateY(-3px);
+        }
+      }
+      
       span {
         color: ${({theme})=>theme.subtitle}
       }
@@ -82,7 +89,6 @@ export const UserProfileInformation = styled.div`
         position: absolute;
         top: 0;
         right: 0;
-        text-transform: uppercase;
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -134,9 +140,16 @@ export const SearchBarContainer = styled.div`
 export const CardGridContainer = styled.div`
   width: 100%;
   display: grid;
-
-  grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
+  grid-template-columns: repeat(2, 1fr);
+  @media screen and (max-width: 720px){
+    grid-template-columns: 1fr;
+  }
+
+  a {
+    border: none;
+  }
+
 `
 
 

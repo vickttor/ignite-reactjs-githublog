@@ -3,14 +3,17 @@ import styled from "styled-components";
 export const PostCardContainer = styled.div`
   background: ${({theme})=>theme.post};
   width: 100%;
-  max-height: 260px;
+  height: 260px;
   padding: 2rem;
   border-radius: 10px;
   position: relative;
-  overflow:hidden;
-  text-overflow: ellipsis;
-  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
   box-shadow: 0px 0px 5px 1px ${({theme})=>`${theme.primary}5F`};
+
+  &:hover{
+    border-color: ${({theme})=>theme.primary};
+  }
 
   &::after {
     content: " ";
@@ -28,11 +31,21 @@ export const PostCardContainer = styled.div`
   h2 {
     color: ${({theme})=>theme.title};
     margin-bottom: 1.25rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Change the value to limit the number of lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%; /* Change the value to limit the width of the container */
   }
 
   p {
-    text-align: left;
     color: ${({theme})=>theme.text};
-
+    display: -webkit-box;
+    -webkit-line-clamp: 4; /* Change the value to limit the number of lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%; /* Change the value to limit the width of the container */
   }
 `;
