@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+
+import * as RadioGroup from '@radix-ui/react-radio-group';
 import * as Popover from '@radix-ui/react-popover';
 
 export const PopoverTrigger = styled(Popover.Trigger)`
@@ -126,9 +128,20 @@ export const InputColorContainer = styled.div`
   flex-wrap: wrap;
 `;
 
-export const InputColor = styled.input`
-  height: 30px;
-  padding: 0.25rem;
-  border-radius: 8px;
-  flex:1;
+
+export const InputRadioColor = styled(RadioGroup.Item)`
+  background-color: ${(props)=>props.value};
+  width: 15px;
+  height: 25px;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px var(--blackA7);
+  border: 2px solid transparent;
+
+  :hover {
+    background: ${(props)=>props.value};
+  }
+  
+  &[data-state=checked] {
+    border-color: white;
+  }
 `;

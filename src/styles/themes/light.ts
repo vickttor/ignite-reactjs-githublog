@@ -9,5 +9,5 @@ export default {
   post: '#E7EDF4',
   profile: '#AFC2D4',
   bgcolor: '#E7EDF4',
-  input: '#C4D4E3',
+  input: '#E7EDF4',
 }

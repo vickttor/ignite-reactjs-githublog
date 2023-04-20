@@ -14,9 +14,6 @@ export function SwitchTheme(){
 
   return (
     <SwitchContainer>
-      <Label htmlFor="light-mode">
-        Ativar Tema claro
-      </Label>
       <SwitchRoot 
         id="light-mode"
         checked={theme === 'light'}
@@ -24,6 +21,9 @@ export function SwitchTheme(){
       >
         <SwitchThumb/>
       </SwitchRoot>
+      <Label htmlFor="light-mode">
+        Light
+      </Label>
     </SwitchContainer>
   )
 }

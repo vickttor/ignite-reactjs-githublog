@@ -7,7 +7,6 @@ export const PostPageContainer = styled.main`
 `;
 
 
-
 export const PostHeaderContainer = styled.section`
   width: 100%;
   min-height: 13.25rem;
@@ -19,12 +18,19 @@ export const PostHeaderContainer = styled.section`
   align-items: flex-start;
   flex-direction: column;
   justify-content: space-between;
+  gap:'2rem'
 `;
 
 export const PostHeaderTitle = styled.h1`
-  color: ${({theme})=>theme.title};
   font-size: 1.5rem;
   text-align: left;
+  color: ${({theme})=>theme.title};
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Change the value to limit the number of lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%; /* Change the value to limit the width of the container */
 `;
 
 export const PostHeaderActions = styled.div`
@@ -114,4 +120,7 @@ export const PostContent = styled.section`
     color: ${({theme})=>`${theme.primary}A9`};
   }
 
+  pre, code {
+    border-radius: 6px;
+  }
 `;
