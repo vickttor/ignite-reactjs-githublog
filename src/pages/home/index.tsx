@@ -16,7 +16,7 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import { PostCard } from "@/components/PostCard";
 import { githubUsersBaseApi, githubSearchsBaseApi } from "@/services/github/api/bases";
-import { ChangeEvent, useEffect, useLayoutEffect, useState } from "react";
+import { ChangeEvent, ReactElement, ReactNode, useEffect, useLayoutEffect, useState } from "react";
 import { IUserProfile } from "@/types/domains/userProfile";
 import { IUserPost } from "@/types/domains/userPost";
 import { Link } from "react-router-dom";
@@ -25,12 +25,12 @@ import { Skeleton } from "@/components/Skeleton";
 import useDebounce from "@/hooks/useDebounce";
 
 const fetchUserProfile = async () => {
-  const {data} = await githubUsersBaseApi.get("/victorhsdev");
+  const { data } = await githubUsersBaseApi.get("/victorhsdev");
   return data;
 };
 
 const fetchUserPosts = async (searchName: string) => {
-  const {data} = await githubSearchsBaseApi.get(`/issues?q=${searchName}repo:victorhsdev/githublog`);
+  const { data } = await githubSearchsBaseApi.get(`/issues?q=${searchName}repo:victorhsdev/githublog`);
   return data;
 }
 
@@ -46,73 +46,83 @@ export function HomePage() {
   const [searchPostName, setSearchPostName] = useState("");
   const debouncedValue = useDebounce<string>(searchPostName, 500);
 
-  const userProfileQuery = useQuery<IUserProfile>(["@githubblog-owner-v1"], fetchUserProfile, {enabled: false});
-  const userPostsQuery = useQuery<IUserPosts>(["@githubblog-posts-v1"], async () => await fetchUserPosts(searchPostName), {enabled: false});
+  const userProfileQuery = useQuery<IUserProfile>(["@githubblog-owner-v1"], fetchUserProfile, { enabled: false });
+  const userPostsQuery = useQuery<IUserPosts>(["@githubblog-posts-v1"], async () => await fetchUserPosts(searchPostName), { enabled: false });
 
-  useLayoutEffect(()=> {
+  useLayoutEffect(() => {
     window.document.title = "Github Blog - Victor Silva Dev";
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
   }, [])
 
-  useEffect(()=> {
+  useEffect(() => {
     userProfileQuery.refetch();
   }, [])
 
-  useEffect(()=> {
+  useEffect(() => {
     userPostsQuery.refetch();
   }, [debouncedValue]);
 
-  function handleChangeSearchName(event: ChangeEvent<HTMLInputElement>){
+  function handleChangeSearchName(event: ChangeEvent<HTMLInputElement>) {
     setSearchPostName(event.target.value)
+  }
+
+  const isLoadingUserQuery = (component: ReactElement | string | undefined, height: string, width?: string, contentSpan?: ReactNode) => {
+    return (userProfileQuery.isLoading
+      ? <Skeleton height={height} width={width} /> :
+      <>
+        {component}
+        <span style={{ display: !contentSpan ? 'none' : 'flex' }} >{contentSpan}</span>
+      </>
+    )
   }
 
   return (
     <HomePageContainer>
       <UserProfileContainer>
-        { userProfileQuery?.isLoading
-          ? <Skeleton height="148px" width="148px"/> 
-          : <UserProfileImage src={userProfileQuery.data?.avatar_url} alt={userProfileQuery.data?.name}/>
+        {isLoadingUserQuery(
+          <UserProfileImage src={userProfileQuery.data?.avatar_url} alt={userProfileQuery.data?.name} />,
+          "148px",
+          "148px",
+        )
         }
         <UserProfileInformation>
           <h1>
-            { userProfileQuery?.isLoading 
-              ? <Skeleton width="150px" height="25px"/> 
-              : userProfileQuery.data?.name
-            }
+            {isLoadingUserQuery(
+              userProfileQuery.data?.name,
+              "25px",
+              "150px"
+            )}
           </h1>
           <p>
-            { userProfileQuery?.isLoading
-              ? <Skeleton  height="50px"/>
-              : userProfileQuery.data?.bio
-            }
-          </p> 
+            {isLoadingUserQuery(
+              userProfileQuery.data?.bio,
+              "50px"
+            )}
+          </p>
           <ul>
             <li>
-              { userProfileQuery?.isLoading  
-                ? <Skeleton width='100px' height="25px" /> 
-                : <>
-                  <MapPin size={22} color={theme.label} weight="duotone" />
-                  <span>{userProfileQuery.data?.location}</span>
-                </>
-              }
+              {isLoadingUserQuery(
+                <MapPin size={22} color={theme.label} weight="duotone" />,
+                "25px",
+                "100px",
+                userProfileQuery.data?.location
+              )}
             </li>
             <li>
-              { userProfileQuery?.isLoading  
-                ? <Skeleton width='100px' height="25px" /> 
-                : <>
-                  <Buildings size={22} color={theme.label} weight="duotone" />
-                  <span>{userProfileQuery.data?.company.split(" | ")[0]}</span>
-                </>
-              }
+              {isLoadingUserQuery(
+                <Buildings size={22} color={theme.label} weight="duotone" />,
+                "25px",
+                "100px",
+                userProfileQuery.data?.company.split(" | ")[0]
+              )}
             </li>
             <li>
-              { userProfileQuery?.isLoading  
-                ? <Skeleton width='100px' height="25px" /> 
-                : <>
-                  <Users size={22} color={theme.label} weight="duotone" />
-                  <span>{userProfileQuery.data?.followers} seguidores</span>
-                </>
-              }
+              {isLoadingUserQuery(
+                <Users size={22} color={theme.label} weight="duotone" />,
+                "25px",
+                "100px",
+                ` ${userProfileQuery.data?.followers} seguidores`
+              )}
             </li>
             <li>
               <a target="_blank" href="https://github.com/victorhsdev">
@@ -128,19 +138,19 @@ export function HomePage() {
           <h3>Publicações</h3>
           <span>{userPostsQuery?.data?.total_count} publicações</span>
         </div>
-        <input value={searchPostName} onChange={handleChangeSearchName} placeholder="Buscar conteúdo"/>
+        <input value={searchPostName} onChange={handleChangeSearchName} placeholder="Buscar conteúdo" />
       </SearchBarContainer>
       <CardGridContainer>
-        {userPostsQuery?.isLoading 
-        ? [...Array(6)].map((_, index) => <Skeleton height={"260px"} key={index}/>)
-        : userPostsQuery?.data?.items.map((post) => (
+        {userPostsQuery?.isLoading
+          ? [...Array(6)].map((_, index) => <Skeleton height={"260px"} key={index} />)
+          : userPostsQuery?.data?.items.map((post) => (
             <Link to={`/posts/${post.number}`} key={post.id}>
-              <PostCard 
+              <PostCard
                 key={post.id}
-                title={post.title} 
-                description={post.body} 
+                title={post.title}
+                description={post.body}
                 time={post.updated_at}
-              /> 
+              />
             </Link>
           ))
         }
