@@ -14,16 +14,16 @@ Finished 🚀
 
 ## Stack
 
-React
-React-Hook-Form
-React-Markdown
-React-Syntax-Highlight
-styled-components
-dayjs
-jotai
-@tanstack/react-query
-@radix-ui (Popover, Radio, Switch)
-@phosphor-icons
+- React
+- React-Hook-Form
+- React-Markdown
+- React-Syntax-Highlight
+- styled-components
+- dayjs
+- jotai
+- @tanstack/react-query
+- @radix-ui (Popover, Radio, Switch)
+- @phosphor-icons
 
 ## Contributors
 
