@@ -8,7 +8,9 @@ Finished 🚀
 
 ## Preview
 
+![Home Page](./.github/home.png)
 
+![Post](./.github/post.png)
 
 ## Stack
 
