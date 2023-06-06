@@ -25,12 +25,12 @@ import { Skeleton } from "@/components/Skeleton";
 import useDebounce from "@/hooks/useDebounce";
 
 const fetchUserProfile = async () => {
-  const { data } = await githubUsersBaseApi.get("/victorhsdev");
+  const { data } = await githubUsersBaseApi.get("/vickttorugo");
   return data;
 };
 
 const fetchUserPosts = async (searchName: string) => {
-  const { data } = await githubSearchsBaseApi.get(`/issues?q=${searchName}repo:victorhsdev/githublog`);
+  const { data } = await githubSearchsBaseApi.get(`/issues?q=${searchName}repo:vickttorugo/githublog`);
   return data;
 }
 
@@ -125,7 +125,7 @@ export function HomePage() {
               )}
             </li>
             <li>
-              <a target="_blank" href="https://github.com/victorhsdev">
+              <a target="_blank" href="https://github.com/vickttorugo">
                 <pre>{userProfileQuery.data?.login}</pre>
                 <ArrowSquareUpRight size={16} weight="duotone" />
               </a>

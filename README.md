@@ -28,5 +28,5 @@ Finished 🚀
 ## Contributors
 
 <a href = "https://github.com/Tanu-N-Prabhu/Python/graphs/contributors">
-  <img src = "https://contrib.rocks/image?repo=victorhsdev/githublog"/>
+  <img src = "https://contrib.rocks/image?repo=vickttorugo/githublog"/>
 </a>
