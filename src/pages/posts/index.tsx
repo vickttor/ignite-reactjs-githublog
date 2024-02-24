@@ -14,7 +14,7 @@ import dracula from 'react-syntax-highlighter/dist/esm/styles/prism/dracula';
 import dayjs from "dayjs";
 
 async function fetchPostContent(number: number) {
-  const { data } = await githubUserReposBaseApi.get(`/vickttorugo/githublog/issues/${number}`);
+  const { data } = await githubUserReposBaseApi.get(`/vickttor/ignite-reactjs-githublog/issues/${number}`);
   return data;
 }
 
